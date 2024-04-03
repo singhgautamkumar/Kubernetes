@@ -34,6 +34,29 @@ gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-
 # Verify Kubernetes Worker Nodes
 kubectl get nodes
 
+Step-06: Review Sample Application: 01-kubernetes-deployment.yaml
+Folder: kube-manifests
+apiVersion: apps/v1
+kind: Deployment 
+metadata: #Dictionary
+  name: myapp1-deployment
+spec: # Dictionary
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp1
+  template:  
+    metadata: # Dictionary
+      name: myapp1-pod
+      labels: # Dictionary
+        app: myapp1  # Key value pairs
+    spec:
+      containers: # List
+        - name: myapp1-container
+          image: stacksimplify/kubenginx:1.0.0
+          ports: 
+            - containerPort: 80  
+    
 # Verify System Pod in kube-system Namespace
 kubectl -n kube-system get pods
 
